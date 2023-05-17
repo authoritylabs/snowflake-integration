@@ -27,6 +27,7 @@
     "eslint-plugin-import": "^2.27.5"
   },
   "dependencies": {
+    "@aws-sdk/client-sts": "^3.332.0",
     "boxen": "^7.0.2",
     "chalk": "^5.2.0",
     "conf": "^11.0.1",
