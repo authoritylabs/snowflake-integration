@@ -23,7 +23,7 @@ Alternatively, you can start the application from the project root by running wi
 node .
 ```
 
-## Prerequisites
+## Required Information and Permissions
 
 The integration setup will prompt for the following details:
 - AWS account id
@@ -111,3 +111,8 @@ Running `Setup SerpWow to Snowflake integration` option will create the followin
 * Snowflake stage named "SERPWOW_RESULTS_S3_STAGE"
 * Snowflake pipe named "SERPWOW_RESULTS_PIPE"
 * Snowflake view named "FLATTENED_SERPS"
+
+### Post-Setup Instructions
+
+* Be sure to grant SELECT privileges to any user or role that will access the created Snowflake view.
+* The view will automatically populate with SERP data from any SerpWow Batch result set that references the created Destination using the JSON format.
