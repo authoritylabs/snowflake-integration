@@ -1,18 +1,26 @@
 # snowflake-integration
 Scripts to setup auto-ingestion pipeline between SerpWow and Snowflake
 
-## Run Application
+## Installation and Usage
 
-### Install
+Prerequisites: [Node.js](https://nodejs.org/) v14.0.0 or greater
 
+Clone this repository and install the application as a global NPM package:
 ```
+git clone git@github.com:authoritylabs/snowflake-integration.git
+cd snowflake-integration.git
 npm install -g .
 ```
 
-### Start
+Start the console application:
 
 ```
 serp2snow
+```
+
+Alternatively, you can start the application from the project root by running with Node:
+```
+node .
 ```
 
 ## Prerequisites
