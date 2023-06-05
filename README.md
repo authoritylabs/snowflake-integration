@@ -37,6 +37,7 @@ The Snowflake user for the provided credentials will need the following privileg
 - CREATE PIPE ON SCHEMA <SCHEMA_NAME>
 - CREATE STAGE ON SCHEMA <SCHEMA_NAME>
 - CREATE TABLE ON SCHEMA <SCHEMA_NAME>
+- CREATE VIEW ON SCHEMA <SCHEMA_NAME>
 
 ### AWS IAM Permissions
 
@@ -101,3 +102,4 @@ Running `Setup SerpWow to Snowflake integration` option will create the followin
 * Snowflake table named "SERPWOW_RESULTS"
 * Snowflake stage named "SERPWOW_RESULTS_S3_STAGE"
 * Snowflake pipe named "SERPWOW_RESULTS_PIPE"
+* Snowflake view named "FLATTENED_SERPS"
