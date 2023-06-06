@@ -1,5 +1,7 @@
 # snowflake-integration
-Scripts to setup auto-ingestion pipeline between SerpWow and Snowflake
+Console application to setup auto-ingestion pipeline between SerpWow batches and Snowflake.
+
+SerpWow sends SERP data to AWS S3 which is piped to Snowflake through the concepts in [this article](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3#option-1-creating-a-new-s3-event-notification-to-automate-snowpipe). A custom view is created to represent flattened SERP results as individual rows.
 
 ## Installation and Usage
 
