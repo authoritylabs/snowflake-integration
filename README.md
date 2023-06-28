@@ -1,7 +1,7 @@
 # snowflake-integration
-Console application to setup auto-ingestion pipeline between SerpWow batches and Snowflake.
+Console application to setup auto-ingestion pipeline between VALUE SERP batches and Snowflake.
 
-SerpWow sends SERP data to AWS S3 which is piped to Snowflake through the concepts in [this article](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3#option-1-creating-a-new-s3-event-notification-to-automate-snowpipe). A custom view is created to represent flattened SERP results as individual rows.
+VALUE SERP sends SERP data to AWS S3 which is piped to Snowflake through the concepts in [this article](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3#option-1-creating-a-new-s3-event-notification-to-automate-snowpipe). A custom view is created to represent flattened SERP results as individual rows.
 
 ## Installation and Usage
 
@@ -30,10 +30,10 @@ node .
 The integration setup will prompt for the following details:
 - AWS account id
 - AWS access key id and secret for authorized IAM user
-- SerpWow API key
+- VALUE SERP API key
 - Snowflake account identifier (see [format docs](https://docs.snowflake.com/en/user-guide/admin-account-identifier))
 - Snowflake username and password
-- The bucket name where SerpWow result data will be staged
+- The bucket name where VALUE SERP result data will be staged
 - The names of the existing Snowflake database and schema where the results will be stored
 
 
@@ -58,7 +58,7 @@ The AWS IAM user for the provided access key will need the following permissions
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "SerpWowWriteAccess",
+      "Sid": "ValueSerpWriteAccess",
       "Effect": "Allow",
       "Action": [
         "iam:CreatePolicy",
@@ -67,8 +67,8 @@ The AWS IAM user for the provided access key will need the following permissions
         "iam:CreateAccessKey"
       ],
       "Resource": [
-        "arn:aws:iam::<aws-account>:policy/serpwow_results_write_to_s3",
-        "arn:aws:iam::<aws-account>:user/serpwow_results_upload_user"
+        "arn:aws:iam::<aws-account>:policy/valueserp_results_write_to_s3",
+        "arn:aws:iam::<aws-account>:user/valueserp_results_upload_user"
       ]
     },
     {
@@ -81,8 +81,8 @@ The AWS IAM user for the provided access key will need the following permissions
         "iam:AttachRolePolicy"
       ],
       "Resource": [
-        "arn:aws:iam::<aws-account>:role/serpwow_integration_snowflake_external",
-        "arn:aws:iam::<aws-account>:policy/serpwow_results_snowflake_access"
+        "arn:aws:iam::<aws-account>:role/valueserp_integration_snowflake_external",
+        "arn:aws:iam::<aws-account>:policy/valueserp_results_snowflake_access"
       ]
     },
     {
@@ -100,21 +100,21 @@ The AWS IAM user for the provided access key will need the following permissions
 
 ### Integration Output
 
-Running `Setup SerpWow to Snowflake integration` option will create the following resources:
+Running `Setup VALUE SERP to Snowflake integration` option will create the following resources:
 
 * AWS S3 bucket of the provided bucket name
-* AWS IAM user "serpwow_results_upload_user"
-* AWS IAM role "serpwow_integration_snowflake_external"
-* AWS IAM policy "serpwow_results_write_to_s3"
-* AWS IAM policy "serpwow_results_snowflake_access"
-* SerpWow destination named "SNOWFLAKE_S3_INTEGRATION"
-* Snowflake storage integration named "SERPWOW_RESULTS_S3"
-* Snowflake table named "SERPWOW_RESULTS"
-* Snowflake stage named "SERPWOW_RESULTS_S3_STAGE"
-* Snowflake pipe named "SERPWOW_RESULTS_PIPE"
+* AWS IAM user "valueserp_results_upload_user"
+* AWS IAM role "valueserp_integration_snowflake_external"
+* AWS IAM policy "valueserp_results_write_to_s3"
+* AWS IAM policy "valueserp_results_snowflake_access"
+* VALUE SERP destination named "SNOWFLAKE_S3_INTEGRATION"
+* Snowflake storage integration named "VALUESERP_RESULTS_S3"
+* Snowflake table named "VALUESERP_RESULTS"
+* Snowflake stage named "VALUESERP_RESULTS_S3_STAGE"
+* Snowflake pipe named "VALUESERP_RESULTS_PIPE"
 * Snowflake view named "FLATTENED_SERPS"
 
 ### Post-Setup Instructions
 
 * Be sure to grant SELECT privileges to any user or role that will access the created Snowflake view.
-* The view will automatically populate with SERP data from any SerpWow Batch result set that references the created Destination using the JSON format.
+* The view will automatically populate with SERP data from any VALUE SERP Batch result set that references the created Destination using the JSON format.
